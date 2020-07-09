@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_printwpstr.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartin- <gmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmartin- <gmartin-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:53:45 by gmartin-          #+#    #+#             */
 /*   Updated: 2020/01/10 11:29:03 by gmartin-         ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartin- <gmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmartin- <gmartin-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 13:00:20 by gmartin-          #+#    #+#             */
 /*   Updated: 2020/01/10 11:13:31 by gmartin-         ###   ########.fr       */

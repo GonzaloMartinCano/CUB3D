@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_finalstring.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartin- <gmartin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmartin- <gmartin-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:45:03 by gmartin-          #+#    #+#             */
 /*   Updated: 2020/01/10 11:17:25 by gmartin-         ###   ########.fr       */

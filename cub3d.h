@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartin- <gmartin-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmartin- <gmartin-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 12:07:03 by gmartin-          #+#    #+#             */
 /*   Updated: 2020/07/08 20:04:06 by gmartin-         ###   ########.fr       */
@@ -97,19 +97,6 @@ typedef struct 		s_moves
 	int			textside;
 }					t_moves;
 
-/*typedef struct		s_textures
-{
-	void	*img;
-	int		*data_img;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	int		w;
-	int		h;
-	int		x;
-	int		y;
-}					t_textures;*/
-
 typedef struct		s_readfile
 {
 	void	*mlx;
@@ -145,9 +132,6 @@ typedef struct		s_readfile
 	int		*tdata[5];
 }					t_file;
 
-/*
-** ft_read_src_file(); utils
-*/
 int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
 int					ft_handle_resolution(t_file *f);
@@ -157,13 +141,23 @@ int					ft_check_extension(char *str);
 int					ft_handle_spritex(t_file *f);
 void				ft_handle_colors(t_file *f);
 int					ft_handle_rgb(t_file *f, int i);
+int					ft_handle_cfloor(t_file *f);
+int					ft_handle_croof(t_file *f);
+int					ft_handle_map_read(t_file *f);
 int					alloc_map(t_file *f);
 int					map_check(int row, int col, t_file *f);
+int					ft_calcdirns(t_file *f);
+int					ft_calcdirew(t_file *f);
+void				ft_hit_wall(t_file *f);
+void				ft_wall_height(t_file *f);
+void				ft_color(t_file *f);
+void				ft_config_texture(t_file *f);
 int					ft_draw(t_file *m);
 int 				ft_key_press(int key, t_file *f);
 int 				ft_key_release(int key, t_file *f);
-int 				ft_calcdir(t_file *f);
 int 				ft_movement(t_file *f);
 int 				ft_move_draw(t_file *f);
+int 				ft_rotation(t_file *f);
+int					ft_canmove(int x);
 
 #endif

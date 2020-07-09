@@ -1,4 +1,4 @@
-R        1920    1080       
+R        920    780       
 NO ./src/Meme1.xpm
 SO ./src/Meme2.xpm
 WE ./src/Meme3.xpm

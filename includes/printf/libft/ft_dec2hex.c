@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dec2hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartin- <gmartin-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmartin- <gmartin-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 12:35:14 by gmartin-          #+#    #+#             */
 /*   Updated: 2020/06/08 12:35:24 by gmartin-         ###   ########.fr       */
