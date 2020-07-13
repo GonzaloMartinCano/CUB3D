@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void		ft_color_side(t_file *f)
+void		ft_color_side(t_file *f)
 {
 	double dx;
 	double dy;
@@ -29,7 +29,7 @@ static void		ft_color_side(t_file *f)
 		f->m.textside = 0;
 }
 
-void			ft_color(t_file *f)
+void		ft_color(t_file *f)
 {
 	if (f->map[f->m.mapX][f->m.mapY] == 1)
 		ft_color_side(f);

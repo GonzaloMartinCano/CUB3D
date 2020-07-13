@@ -34,6 +34,7 @@ int				ft_handle_path_texture(t_file *f, int i)
 		f->textures[i] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
 		f->tdata[i] = (int *)mlx_get_data_addr(f->textures[i],
 			&f->bits_per_pixel, &f->size_line, &f->endian);
+		close(f->texture[i]);
 	}
 	while (*f->line)
 		f->line++;
@@ -44,6 +45,8 @@ int				ft_handle_path_spritex(t_file *f, int i)
 {
 	char	*aux;
 	char	*ext;
+	int		w;
+	int		h;
 
 	if (!(f->line = ft_strchr(f->line, '.')))
 		ft_handle_error("Path of Spritex is invalid\n");
@@ -55,6 +58,13 @@ int				ft_handle_path_spritex(t_file *f, int i)
 		ft_handle_error("The extension of Spritex file is invalid\n");
 	if ((f->sprite = open(--aux, O_RDONLY)) < 0)
 		ft_handle_error("Error at opening Spritex file\n");
+	else
+	{
+		f->textures[4] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
+		f->tdata[4] = (int *)mlx_get_data_addr(f->textures[4],
+			&f->bits_per_pixel, &f->size_line, &f->endian);
+		close(f->sprite);
+	}
 	while (*f->line)
 		f->line++;
 	return (f->rtn);

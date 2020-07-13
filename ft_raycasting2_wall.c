@@ -31,8 +31,7 @@ void		ft_hit_wall(t_file *f)
 			f->m.mapY += f->m.stepY;
 			f->m.side = 1;
 		}
-		if (f->map[f->m.mapX][f->m.mapY] == 2
-			|| f->map[f->m.mapX][f->m.mapY] == 1)
+		if (f->map[f->m.mapX][f->m.mapY] == 1)
 			hit = 1;
 	}
 }

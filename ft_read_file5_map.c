@@ -42,6 +42,8 @@ void		ft_filling_matrix(t_file *f, int k, int i, int j)
 	if (f->buff[k] == '0' || f->buff[k] == '1' || f->buff[k] == '2')
 	{
 		f->map[i][j] = (int)f->buff[k] - '0';
+		if (f->buff[k] == '2')
+			f->spritenum++;
 	}
 	else if (f->buff[k] == ' ')
 	{

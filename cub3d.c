@@ -48,12 +48,12 @@ void		ft_init_file_struct2(t_file *f)
 	f->m.sideDist.y = 0;
 	f->m.dir.x = 0.0;
 	f->m.dir.y = 0.0;
-	f->m.rotSpeed = 0.06;
-	f->m.moveSpeed = 0.06;
+	f->m.rotSpeed = 0.03;
+	f->m.moveSpeed = 0.05;
 	f->m.side = 0;
 	f->m.W = 0;
 	f->m.S = 0;
-	f->m.A = 0;
+	f->m.A = 0;	
 	f->m.D = 0;
 	f->m.L = 0;
 	f->m.R = 0;
@@ -61,6 +61,21 @@ void		ft_init_file_struct2(t_file *f)
 	f->m.textY = 0;
 	f->m.textX = 0;
 	f->m.textstep = 0;
+	f->spritenum = 0;
+	f->sptexturey = 0.0;
+	f->sptexturex = 0.0;
+	f->movscreen = 0;
+	f->spheight = 0;
+	f->transp.y = 0;
+	f->transp.x = 0;
+	f->spscreenx = 0;
+	f->drawstart_y = 0;
+	f->drawstart_x = 0;
+	f->drawend_y = 0;
+	f->drawend_x = 0;
+	f->sposX = 0;
+	f->sposY = 0;
+	f->inv_det = 0;
 }
 
 int		ft_read(t_file *f)
@@ -97,10 +112,13 @@ int		main(/*int argc, char *argv[]*/)
 	f.img = mlx_new_image(f.mlx, f.w, f.h);
 	f.data_img = (int *)mlx_get_data_addr(f.img, &f.bits_per_pixel,
 		&f.size_line, &f.endian);
-	ft_draw(&f);
+	init_sprite(&f);
+	get_sprite_pos(&f);
+	//ft_draw(&f);
 	mlx_hook(f.win, 2, 1, ft_key_press, &f);
 	mlx_hook(f.win, 3, 2, ft_key_release, &f);
 	mlx_loop_hook(f.mlx, ft_move_draw, &f);
+	mlx_hook(f.win, 17, 1, ft_exitgame, &f);
 	mlx_loop(f.mlx);
 	return (0);
 }

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
 
 int		ft_canmove(int x)
 {
@@ -20,10 +19,16 @@ int		ft_canmove(int x)
 	return (1);
 }
 
+int					ft_exitgame(t_file *f)
+{
+	mlx_destroy_window(f->mlx, f->win);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
 int		ft_key_press(int key, t_file *f)
 {
 	if (key == KEY_ESC)
-		mlx_destroy_window(f->mlx, f->win);
+		ft_exitgame(f);
 	if (key == KEY_W)
 		f->m.W = 1;
 	if (key == KEY_S)

@@ -46,4 +46,6 @@ int			ft_calcdirew(t_file *f)
 		f->m.plane.x = -0.66;
 		f->m.plane.y = 0.00;
 	}
+	if (!(f->z_buffer = (double*)malloc(sizeof(double) * f->w)))
+		ft_handle_error("ERROR malloc z_bufer");
 }

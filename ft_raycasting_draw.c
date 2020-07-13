@@ -14,8 +14,8 @@
 
 static void		ft_calcamera(t_file *f, int x)
 {
-	f->m.mapX = f->currentpos.x;
-	f->m.mapY = f->currentpos.y;
+	f->m.mapX = (int)f->currentpos.x;
+	f->m.mapY = (int)f->currentpos.y;
 	f->m.cameraX = (2 * x / (double)f->w) - 1;
 	f->m.rayDir.x = f->m.dir.x + f->m.plane.x * f->m.cameraX;
 	f->m.rayDir.y = f->m.dir.y + f->m.plane.y * f->m.cameraX;
@@ -88,10 +88,11 @@ int				ft_draw(t_file *f)
 		ft_calcstep(f);
 		ft_hit_wall(f);
 		ft_wall_height(f);
-		ft_color(f);
+		//ft_color(f);
+		ft_color_side(f);
 		ft_config_texture(f);
 		ft_draw_line(f, x);
+		f->z_buffer[x] = f->m.perpWallDist;
 		x++;
 	}
-	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 }

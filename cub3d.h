@@ -20,13 +20,19 @@
 # include "includes/minilibx/mlx.h"
 # include "includes/printf/ft_printf.h"
 # include <math.h>
+# include <X11/Xlib.h>
 
 /*----------TAMAÑOS TEXTURAS PREDEF---------*/
 
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
+# define VMOVE 0
+# define VDIV 1
+# define UDIV 1
+
 /*----------TECLAS_KEYCODE---------*/
+
 #ifdef __linux__
 #  define KEY_ESC 65307
 #  define KEY_C 99
@@ -60,6 +66,8 @@ typedef struct s_vector
 	double x;
 	double y;
 } 				t_vector;
+
+
 
 typedef struct 		s_moves
 {
@@ -127,20 +135,41 @@ typedef struct		s_readfile
 	int		size_line;
 	int		endian;
 	t_vector	currentpos;
-	t_moves	m;
-	void 	*textures[5];
+	int 	*textures[5];
 	int		*tdata[5];
+	int		spritenum;
+	int		*sp_order;
+	t_vector	transp;
+	double		inv_det;
+	int			spscreenx;
+	int			spheight;
+	int			movscreen;
+	int 		drawend_x;
+	int			drawend_y;
+	int			drawstart_x;
+	int			drawstart_y;
+	int			spwidth;
+	int			sptexturex;
+	int			sptexturey;
+	double		*z_buffer;
+	double		sposX;
+	double		sposY;
+	int			*used;
+	double		*s_pos_x;
+	double		*s_pos_y;
+	double		*distance;
+	t_moves	m;
 }					t_file;
 
 int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
-int					ft_handle_resolution(t_file *f);
-void				ft_handle_error(char *str);
-int					ft_handle_textures(t_file *f);
-int					ft_check_extension(char *str);
-int					ft_handle_spritex(t_file *f);
 void				ft_handle_colors(t_file *f);
+void				ft_handle_error(char *str);
 int					ft_handle_rgb(t_file *f, int i);
+int					ft_handle_resolution(t_file *f);
+int					ft_check_extension(char *str);
+int					ft_handle_textures(t_file *f);
+int					ft_handle_spritex(t_file *f);
 int					ft_handle_cfloor(t_file *f);
 int					ft_handle_croof(t_file *f);
 int					ft_handle_map_read(t_file *f);
@@ -159,5 +188,11 @@ int 				ft_movement(t_file *f);
 int 				ft_move_draw(t_file *f);
 int 				ft_rotation(t_file *f);
 int					ft_canmove(int x);
+int					ft_exitgame(t_file *f);
+void				ft_color_side(t_file *f);
+void				ft_draw_sprite(t_file *f);
+int 				get_sprite_pos(t_file *f);
+int 				init_sprite(t_file *f);
+
 
 #endif
