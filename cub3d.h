@@ -27,7 +27,7 @@
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
-# define VMOVE 0
+# define VMOVE 200
 # define VDIV 1
 # define UDIV 1
 
@@ -67,7 +67,13 @@ typedef struct s_vector
 	double y;
 } 				t_vector;
 
-
+typedef struct		s_sprite
+{
+	t_vector		pos;						// posicion del sprite en el mapa
+	t_vector		cam_pos;					// posicion del sprite en relacion conm la camara
+	double			distance;					// distancia del sprite con el jugador
+	int				used;						// indica is el sprite ya ha sido pintado
+}					t_sprite;
 
 typedef struct 		s_moves
 {
@@ -137,27 +143,22 @@ typedef struct		s_readfile
 	t_vector	currentpos;
 	int 	*textures[5];
 	int		*tdata[5];
-	int		spritenum;
-	int		*sp_order;
-	t_vector	transp;
-	double		inv_det;
-	int			spscreenx;
-	int			spheight;
-	int			movscreen;
-	int 		drawend_x;
-	int			drawend_y;
-	int			drawstart_x;
-	int			drawstart_y;
-	int			spwidth;
-	int			sptexturex;
-	int			sptexturey;
-	double		*z_buffer;
-	double		sposX;
-	double		sposY;
-	int			*used;
-	double		*s_pos_x;
-	double		*s_pos_y;
-	double		*distance;
+	double			*z_buffer;						// buffer profundidad
+	t_sprite		*sp;						// array de estructuras de sprites
+	int				*sp_order;					// array de index ordenados
+	t_vector		transform;					// transform del sprite
+	double			inv_det;					// inversa para transform
+	int				sp_screen_x;
+	int				sp_height;					// altura del sprite
+	int				sp_width;					// ancho del sprite
+	int				start_sp_x;					// draw start x
+	int				start_sp_y;					// draw start y
+	int				end_sp_x;					// draw end x
+	int				end_sp_y;					// draw end y
+	int				tex_x;						// texture x
+	int				tex_y;
+	int				sprite_num;
+	int				movescreen;
 	t_moves	m;
 }					t_file;
 
@@ -190,9 +191,10 @@ int 				ft_rotation(t_file *f);
 int					ft_canmove(int x);
 int					ft_exitgame(t_file *f);
 void				ft_color_side(t_file *f);
-void				ft_draw_sprite(t_file *f);
+void				ft_sprite(t_file *f);
 int 				get_sprite_pos(t_file *f);
-int 				init_sprite(t_file *f);
+void 				ft_init_sp(t_file *f);
+void 				ft_calc_dist_draw(t_file *f);
 
 
 #endif

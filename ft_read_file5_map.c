@@ -43,7 +43,7 @@ void		ft_filling_matrix(t_file *f, int k, int i, int j)
 	{
 		f->map[i][j] = (int)f->buff[k] - '0';
 		if (f->buff[k] == '2')
-			f->spritenum++;
+			f->sprite_num++;
 	}
 	else if (f->buff[k] == ' ')
 	{
@@ -59,9 +59,9 @@ void		ft_filling_matrix(t_file *f, int k, int i, int j)
 			ft_calcdirns(f);
 			ft_calcdirew(f);
 			f->pos[0] = i;
-			f->currentpos.x = i;
+			f->currentpos.x = i + 0.5;
 			f->pos[1] = j;
-			f->currentpos.y = j;
+			f->currentpos.y = j + 0.5;
 		}
 	}
 }

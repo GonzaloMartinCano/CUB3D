@@ -20,15 +20,15 @@ int get_sprite_pos(t_file *f)
 
 	y = 0;
 	i = 0;
-	while (y < f->nFil)
+	while (y < f->nColMax)
 	{
 		x = 0;
-		while (x < f->nColMax)
+		while (x < f->nFil)
 		{
-			if (f->map[y][x] == 2)
+			if (f->map[x][y] == 2)
 			{
-				f->s_pos_x[i] = y + 0.6;
-				f->s_pos_y[i] = x + 0.6;
+				f->s_pos_x[i] = x + 0.6;
+				f->s_pos_y[i] = y + 0.6;
 				i++;
 			}
 			x++;
@@ -115,8 +115,8 @@ int init_sprite(t_file *f)
 
 int			ft_sprite_height(t_file *f)
 {
-	f->spscreenx = (int)(f->w / 2) * 1 + (f->transp.x / f->transp.y);
-	f->movscreen = (int)(VMOVE / f->transp.y);
+	f->spscreenx = (int)(f->w / 2) * (1 + f->transp.x / f->transp.y);
+	//f->movscreen = (int)(f->h / 4) / f->transp.y;
 	f->spheight = abs((int)(f->h / f->transp.y)) / VDIV;
 	f->drawstart_y = -f->spheight / 2 + f->h / 2 + f->movscreen;	
 	f->drawstart_y = f->drawstart_y < 0 ? 0 : f->drawstart_y;

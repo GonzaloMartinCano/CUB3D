@@ -44,11 +44,11 @@ void		ft_wall_height(t_file *f)
 	else
 		f->m.perpWallDist = (f->m.mapY - f->currentpos.y
 			+ (1 - f->m.stepY) / 2) / f->m.rayDir.y;
-	f->m.lineHeight = (int)(f->h / f->m.perpWallDist) * 2;
+	f->m.lineHeight = (int)(f->h / f->m.perpWallDist);
 	f->m.drawStart = (-f->m.lineHeight / 2) + f->h / 2;
 	if (f->m.drawStart < 0)
 		f->m.drawStart = 0;
 	f->m.drawEnd = (f->m.lineHeight / 2) + f->h / 2;
-	if (f->m.drawEnd >= f->h || f->m.drawEnd <= 0)
+	if (f->m.drawEnd >= f->h || f->m.drawEnd == 0)
 		f->m.drawEnd = f->h - 1;
 }

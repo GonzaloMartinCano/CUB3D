@@ -17,7 +17,6 @@ void		ft_init_file_struct(t_file *f)
 	int i;
 
 	i = 0;
-	f->fd = 0;
 	f->w = 0;
 	f->h = 0;
 	f->rtn = 0;
@@ -53,7 +52,7 @@ void		ft_init_file_struct2(t_file *f)
 	f->m.side = 0;
 	f->m.W = 0;
 	f->m.S = 0;
-	f->m.A = 0;	
+	f->m.A = 0;
 	f->m.D = 0;
 	f->m.L = 0;
 	f->m.R = 0;
@@ -61,30 +60,15 @@ void		ft_init_file_struct2(t_file *f)
 	f->m.textY = 0;
 	f->m.textX = 0;
 	f->m.textstep = 0;
-	f->spritenum = 0;
-	f->sptexturey = 0.0;
-	f->sptexturex = 0.0;
-	f->movscreen = 0;
-	f->spheight = 0;
-	f->transp.y = 0;
-	f->transp.x = 0;
-	f->spscreenx = 0;
-	f->drawstart_y = 0;
-	f->drawstart_x = 0;
-	f->drawend_y = 0;
-	f->drawend_x = 0;
-	f->sposX = 0;
-	f->sposY = 0;
-	f->inv_det = 0;
+	f->sprite_num = 0;
 }
 
-int		ft_read(t_file *f)
+int			ft_read(t_file *f)
 {
 	int br;
 
 	ft_init_file_struct(f);
 	ft_init_file_struct2(f);
-	f->fd = open("tx.txt", O_RDONLY);
 	while ((br = get_next_line(f->fd, &f->line)) >= 0)
 	{
 		if (ft_read_src_file(f) == -1)
@@ -94,6 +78,8 @@ int		ft_read(t_file *f)
 	}
 	ft_handle_colors(f);
 	alloc_map(f);
+	if (f->dir == '\0')
+		ft_handle_error("ERROR no init player dir!\n");
 	if (f->rtn == -1)
 		ft_handle_error("MAP.ERROR while allock. asshole\n");
 	if ((f->rtn = map_check(f->pos[0], f->pos[1], f)) == -1)
@@ -101,20 +87,41 @@ int		ft_read(t_file *f)
 	return (f->rtn);
 }
 
-int		main(/*int argc, char *argv[]*/)
+void		ft_chek_args(t_file *f, int argc, char *argv[])
+{
+	char	*aux;
+	int		len;
+
+	if (argc == 2)
+	{
+		aux = argv[1];
+		len = ft_strlen(argv[1]);
+		if (len < 5)
+			ft_handle_error("ERROR file name\n");
+		if (ft_strcmp(".cub", ft_substr(argv[1], len - 4, 4)) != 4)
+			ft_handle_error("ERROR file name \n");
+		if ((f->fd = open(argv[1], O_RDONLY)) <= 0)
+			ft_handle_error("ERROR open file\n");
+	}
+	else
+		ft_handle_error("ERROR NEED ONLY 2 ARGUMENTS \n");
+}
+
+int			main(int argc, char *argv[])
 {
 	t_file f;
+
+	ft_chek_args(&f, argc, argv);
 	if (!(f.mlx = mlx_init()))
 		ft_handle_error("MAP.ERROR while open_mlx stupid\n");
 	ft_read(&f);
-	if (!(f.win = mlx_new_window(f.mlx, f.w, f.h, "Hello world!")))
+	if (!(f.win = mlx_new_window(f.mlx, f.w, f.h, "CUB3D by Gonzalo Martin")))
 		ft_handle_error("MAP.ERROR while open_mlx_window\n");
 	f.img = mlx_new_image(f.mlx, f.w, f.h);
 	f.data_img = (int *)mlx_get_data_addr(f.img, &f.bits_per_pixel,
 		&f.size_line, &f.endian);
-	init_sprite(&f);
-	get_sprite_pos(&f);
-	//ft_draw(&f);
+	ft_init_sp(&f);
+	ft_draw(&f);
 	mlx_hook(f.win, 2, 1, ft_key_press, &f);
 	mlx_hook(f.win, 3, 2, ft_key_release, &f);
 	mlx_loop_hook(f.mlx, ft_move_draw, &f);

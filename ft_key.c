@@ -19,12 +19,13 @@ int		ft_canmove(int x)
 	return (1);
 }
 
-int					ft_exitgame(t_file *f)
+int		ft_exitgame(t_file *f)
 {
 	mlx_destroy_window(f->mlx, f->win);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
+
 int		ft_key_press(int key, t_file *f)
 {
 	if (key == KEY_ESC)

@@ -60,7 +60,7 @@ static void		ft_draw_line(t_file *f, int x)
 		*(f->data_img + (i * f->w) + x) = 7719150;
 		i++;
 	}
-	while (i < f->m.drawEnd)
+	while (i <= f->m.drawEnd)
 	{
 		f->m.textY = (int)f->m.textpos & (TEXTURE_HEIGHT - 1);
 		f->m.textpos += f->m.textstep;
@@ -69,7 +69,7 @@ static void		ft_draw_line(t_file *f, int x)
 		*(f->data_img + (i * f->w) + x) = color;
 		i++;
 	}
-	while (i < f->h)
+	while (i <= f->h)
 	{
 		*(f->data_img + (i * f->w) + x) = 7364912;
 		i++;
@@ -88,7 +88,6 @@ int				ft_draw(t_file *f)
 		ft_calcstep(f);
 		ft_hit_wall(f);
 		ft_wall_height(f);
-		//ft_color(f);
 		ft_color_side(f);
 		ft_config_texture(f);
 		ft_draw_line(f, x);

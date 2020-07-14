@@ -108,8 +108,12 @@ int		ft_move_draw(t_file *f)
 	ft_movementlr(f);
 	ft_rotationleft(f);
 	ft_rotationright(f);
+	mlx_destroy_image(f->mlx, f->img);
+	f->img = mlx_new_image(f->mlx, f->w, f->h);
+	f->data_img = (int *)mlx_get_data_addr(f->img, &f->bits_per_pixel,
+		&f->size_line, &f->endian);
 	ft_draw(f);
-	ft_draw_sprite(f);
-	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);	
+	ft_sprite(f);
+	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 	return (0);
 }

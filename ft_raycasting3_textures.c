@@ -37,7 +37,7 @@ void		ft_color(t_file *f)
 		f->m.color = 16712447;
 }
 
-void			ft_config_texture(t_file *f)
+void		ft_config_texture(t_file *f)
 {
 	if (f->m.side == 0)
 		f->m.wallX = f->currentpos.y + f->m.perpWallDist * f->m.rayDir.y;
