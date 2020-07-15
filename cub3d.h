@@ -14,8 +14,11 @@
 # define CUB3D_H
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/ipc.h>
+# include <sys/shm.h>
 # include <fcntl.h>
 # include "includes/minilibx/mlx.h"
 # include "includes/printf/ft_printf.h"
