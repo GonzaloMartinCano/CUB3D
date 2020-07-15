@@ -25,6 +25,7 @@
 # include <math.h>
 # include <X11/Xlib.h>
 
+
 /*----------TAMAÑOS TEXTURAS PREDEF---------*/
 
 # define TEXTURE_WIDTH 64
