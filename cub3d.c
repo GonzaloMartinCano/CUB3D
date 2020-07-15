@@ -76,7 +76,7 @@ int			ft_read(t_file *f)
 		if (br == 0)
 			break ;
 	}
-	ft_handle_colors(f);
+	ft_handle_rgb(f);
 	alloc_map(f);
 	if (f->dir == '\0')
 		ft_handle_error("ERROR no init player dir!\n");
@@ -124,8 +124,8 @@ int			main(int argc, char *argv[])
 	ft_draw(&f);
 	mlx_hook(f.win, 2, 1, ft_key_press, &f);
 	mlx_hook(f.win, 3, 2, ft_key_release, &f);
+	mlx_hook(f.win, 17, 1<<17, ft_exitgame, &f);
 	mlx_loop_hook(f.mlx, ft_move_draw, &f);
-	mlx_hook(f.win, 17, 1, ft_exitgame, &f);
 	mlx_loop(f.mlx);
 	return (0);
 }

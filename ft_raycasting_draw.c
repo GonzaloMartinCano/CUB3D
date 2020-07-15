@@ -57,7 +57,7 @@ static void		ft_draw_line(t_file *f, int x)
 	i = 0;
 	while (i < f->m.drawStart)
 	{
-		*(f->data_img + (i * f->w) + x) = 7719150;
+		*(f->data_img + (i * f->w) + x) = f->ccieling;
 		i++;
 	}
 	while (i <= f->m.drawEnd)
@@ -71,7 +71,7 @@ static void		ft_draw_line(t_file *f, int x)
 	}
 	while (i <= f->h)
 	{
-		*(f->data_img + (i * f->w) + x) = 7364912;
+		*(f->data_img + (i * f->w) + x) = f->cfloor;
 		i++;
 	}
 }

@@ -18,46 +18,12 @@ void			ft_handle_error(char *str)
 	exit(0);
 }
 
-void			ft_handle_colors(t_file *f)
+int				ft_handle_rgb(t_file *f)
 {
-	if ((ft_handle_rgb(f, 1)) == -1)
-		ft_handle_error("Text. ERROR while parsing rgb to hex\n");
-	if ((ft_handle_rgb(f, 2)) == -1)
-		ft_handle_error("Text. ERROR while parsing rgb to hex\n");
-}
-
-int				ft_handle_rgb(t_file *f, int i)
-{
-	char	*tmp;
-	char	*aux;
-	char	**color;
-	int		*rgb;
-
-	if (i == 1)
-	{
-		color = &f->c_f;
-		rgb = f->cf;
-	}
-	else if (i == 2)
-	{
-		color = &f->c_c;
-		rgb = f->cc;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		tmp = ft_dec2hex((unsigned long)rgb[i]);
-		if (i == 0)
-			*color = ft_strdup(tmp);
-		else
-		{
-			aux = ft_strjoin(*color, tmp);
-			free(*color);
-			*color = aux;
-		}
-		i++;
-	}
-	return (f->rtn);
+	f->ccieling = (((f->cc[0] * 256) * 256) + (f->cc[1] * 256) + f->cc[2]);
+	f->cfloor = (((f->cf[1] * 256) * 256) + (f->cf[1] * 256) + f->cf[2]);
+	if (f->ccieling < 0 || f->cfloor < 0)
+		ft_handle_error("ERROR color");
 }
 
 int				ft_read_src_file2(t_file *f)

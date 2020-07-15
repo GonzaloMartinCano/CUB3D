@@ -109,6 +109,7 @@ typedef struct 		s_moves
 	double		wallX;
 	double		textstep;
 	int			textside;
+
 }					t_moves;
 
 typedef struct		s_readfile
@@ -127,6 +128,8 @@ typedef struct		s_readfile
 	int		cf[3];				//  colores del suelo en formato rgb.
 	char	*c_c;				//  colores del techo en formato hex.
 	int		cc[3];
+	int		ccieling;		// Color formato int
+	int		cfloor;
 	int		**map;				//  Matriz de mapa
 	char	dir;				//  orientacion del jugador
 	int		pos[2];				// 	posicion incial del jugador
@@ -166,7 +169,7 @@ int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
 void				ft_handle_colors(t_file *f);
 void				ft_handle_error(char *str);
-int					ft_handle_rgb(t_file *f, int i);
+int					ft_handle_rgb(t_file *f);
 int					ft_handle_resolution(t_file *f);
 int					ft_check_extension(char *str);
 int					ft_handle_textures(t_file *f);
