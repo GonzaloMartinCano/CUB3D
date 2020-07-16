@@ -113,7 +113,6 @@ typedef struct 		s_moves
 	double		wallX;
 	double		textstep;
 	int			textside;
-
 }					t_moves;
 
 typedef struct		s_readfile
@@ -166,8 +165,29 @@ typedef struct		s_readfile
 	int				tex_y;
 	int				sprite_num;
 	int				movescreen;
+	int				bmp_active; 
 	t_moves	m;
 }					t_file;
+
+typedef struct		s_bmp
+{
+	unsigned char	type[2];
+	int				file_size;
+	int				reserved;
+	int				offset;
+	unsigned int	size_header;
+	unsigned int	width;
+	unsigned int	height;
+	short int		planes;
+	short int		bit_count;
+	unsigned int	compression;
+	unsigned int	image_size;
+	unsigned int	ppm_x;
+	unsigned int	ppm_y;
+	unsigned int	clr_used;
+	unsigned int	clr_important;
+	int color;
+}					t_bmp;
 
 int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
@@ -202,6 +222,9 @@ void				ft_sprite(t_file *f);
 int 				get_sprite_pos(t_file *f);
 void 				ft_init_sp(t_file *f);
 void 				ft_calc_dist_draw(t_file *f);
+void				ft_init_bmp(t_file *f, t_bmp *bmp);
+void				ft_save_bmp(t_file *f);
+void 				checkcorrectargument(t_file *f, char *aux);
 
 
 #endif

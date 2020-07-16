@@ -15,9 +15,17 @@
 static void		ft_set_res(char **res, int j, t_file *f)
 {
 	if (j == 1)
+	{	
 		f->w = ft_atoi(res[j]);
+		if (f->w > 1920)
+			f->w = 920;
+	}
 	if (j == 2)
+	{	
 		f->h = ft_atoi(res[j]);
+		if (f->h > 920)
+			f->h = 920;
+	}
 }
 
 int				ft_check_extension(char *str)

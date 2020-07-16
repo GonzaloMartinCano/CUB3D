@@ -20,15 +20,15 @@ int				ft_handle_path_texture(t_file *f, int i)
 	int		h;
 
 	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error("Path of Texture is invalid\n");
+		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
 	else if (*(f->line + 1) == '/')
 		aux = ft_strdup(f->line);
 	else
-		ft_handle_error("Path of Texture is invalid\n");
+		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error("The extension of Texture file is invalid\n");
+		ft_handle_error("ERROR: EXTENSION TEXTURE INVALID\n");
 	if ((f->texture[i] = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error("Error at opening Texture file\n");
+		ft_handle_error("ERROR: OPEN TEXTURE FILE\n");
 	else
 	{
 		f->textures[i] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
@@ -49,15 +49,15 @@ int				ft_handle_path_spritex(t_file *f, int i)
 	int		h;
 
 	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error("Path of Spritex is invalid\n");
+		ft_handle_error("ERROR: PATH SPRITE TEXTURE INVALID\n");
 	else if (*(f->line + 1) == '/')
 		aux = ft_strdup(f->line);
 	else
-		ft_handle_error("Path of Spritex is invalid\n");
+		ft_handle_error("ERROR: PATH SPRITE TEXTURE INVALID\n");
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error("The extension of Spritex file is invalid\n");
+		ft_handle_error("ERROR:  SPRITE EXTENSION TEXTURE INVALID\n");
 	if ((f->sprite = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error("Error at opening Spritex file\n");
+		ft_handle_error("ERROR: OPEN SPRITE TEXTURE\n");
 	else
 	{
 		f->textures[4] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);

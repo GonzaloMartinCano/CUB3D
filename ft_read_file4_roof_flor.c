@@ -61,7 +61,7 @@ int			ft_handle_cfloor(t_file *f)
 	{
 		test2 = ft_split(++f->line, ',');
 		if (localisdigit(f, test2) == -1)
-			ft_handle_error("ERROR en color suelo");
+			ft_handle_error("ERROR: IN FLOOR COLOR");
 		if ((f->cf[0] = ft_atoi(test2[0])) >= 0)
 			if (f->cf[0] > 255 || f->cf[0] < 0)
 				return ((f->rtn = -1));
@@ -84,7 +84,7 @@ int			ft_handle_croof(t_file *f)
 	{
 		test2 = ft_split(++f->line, ',');
 		if (localisdigit(f, test2) == -1)
-			ft_handle_error("ERROR en color cielo");
+			ft_handle_error("ERROR: IN CIELING COLOR");
 		if ((f->cc[0] = ft_atoi(test2[0])) >= 0)
 			if (f->cc[0] > 255 || f->cc[0] < 0)
 				return ((f->rtn = -1));
