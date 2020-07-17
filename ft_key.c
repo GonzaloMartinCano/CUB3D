@@ -21,6 +21,15 @@ int		ft_canmove(int x)
 
 int		ft_exitgame(t_file *f)
 {
+	int i;
+
+	i = 0;
+	while(i < 5)
+	{
+		mlx_destroy_image(f->mlx, f->textures[i]);
+		f->textures[i] = NULL;
+		i++;
+	}
 	mlx_destroy_window(f->mlx, f->win);
 	exit(EXIT_SUCCESS);
 }
