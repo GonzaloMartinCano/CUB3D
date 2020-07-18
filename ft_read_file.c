@@ -48,6 +48,8 @@ int				ft_read_src_file2(t_file *f)
 
 int				ft_read_src_file(t_file *f)
 {
+	char *aux;
+
 	if (!f->w && !f->h)
 	{
 		if ((ft_handle_resolution(f)) == -1 || f->w < 200 ||

@@ -12,75 +12,86 @@
 
 #include "libft.h"
 
-static char		*ft_del(char *ptr)
+static int	get_line(char **file, char **line)
 {
-	if (ptr)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
-	return (ptr);
-}
-
-static int		ft_return(int len, char **line)
-{
-	if (len < 0)
-		return (-1);
-	*line = ft_strdup("");
-	return (0);
-}
-
-static char		*ft_line(char *auxfd, char **line, int *len)
-{
-	int		pos;
+	int		i;
 	char	*temp;
-
-	pos = 0;
-	while (auxfd[pos] != '\n' && auxfd[pos] != '\0')
-		pos++;
-	if (auxfd[pos] == '\n')
+	i = 0;
+	while (*(*file + i) != '\0' && *(*file + i) != '\n')
+		i++;
+	if (*(*file + i) == '\n')
 	{
-		*line = ft_substr(auxfd, 0, pos);
-		temp = ft_strdup(auxfd + (pos + 1));
-		free(auxfd);
-		auxfd = temp;
-		if (auxfd[0] == '\0')
-			auxfd = ft_del(auxfd);
-		*len = 1;
+		*line = ft_substr(*file, 0, i);
+		temp = ft_strdup(*file + i + 1);
+		free(*file);
+		*file = temp;
 	}
 	else
 	{
-		*line = ft_strdup(auxfd);
-		free(auxfd);
-		auxfd = NULL;
-		*len = 0;
+		*line = ft_strdup(*file);
+		free(*file);
+		*file = 0;
+		return (0);
 	}
-	return (auxfd);
+	return (1);
 }
-
-int				get_next_line(int fd, char **line)
+static int	read_to_buffer(int ret, char **file, char **buffer, int fd)
 {
-	static char *auxfd[4096];
-	char		*buff;
-	int			len;
-
-	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
-		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (-1);
-	while ((len = read(fd, buff, BUFFER_SIZE)) > 0)
+	char *aux;
+	while (ret == BUFFER_SIZE)
 	{
-		buff[len] = '\0';
-		if (auxfd[fd] == NULL)
-			auxfd[fd] = ft_strdup(buff);
-		else
-			auxfd[fd] = ft_strjoin(auxfd[fd], buff);
-		if (ft_strchr(auxfd[fd], '\n'))
+		if (ft_strchr(*file, '\n'))
 			break ;
+		ret = read(fd, *buffer, BUFFER_SIZE);
+		if (ret == -1)
+		{
+			free(*buffer);
+			free(*file);
+			return (-1);
+		}
+		*(*buffer + ret) = '\0';
+		aux = ft_strjoin(*file, *buffer);
+		free(*file);
+		*file = aux;
 	}
-	free(buff);
-	if ((len < 0) || (len == 0 && auxfd[fd] == NULL))
-		return (ft_return(len, line));
-	auxfd[fd] = ft_line(auxfd[fd], line, &len);
-	return (len);
+	free(*buffer);
+	return (0);
+}
+static int	empty_line(int ret, char **line, char **buffer)
+{
+	if (ret == 0)
+	{
+		*line = ft_strdup("");
+		free(*buffer);
+		return (0);
+	}
+	else
+	{
+		free(*buffer);
+		return (-1);
+	}
+}
+int			get_next_line(int fd, char **line)
+{
+	int			ret;
+	char		*buffer;
+	static char *file;
+	
+	ret = BUFFER_SIZE;
+	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))) || !line)
+		return (-1);
+	if (!file)
+	{
+		ret = read(fd, buffer, BUFFER_SIZE);
+		if (ret == 0 || ret == -1)
+			return (empty_line(ret, &*line, &buffer));
+		buffer[ret] = '\0';
+		file = ft_strdup(buffer);
+		free(buffer);
+		if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+			return (-1);
+	}
+	if (read_to_buffer(ret, &file, &buffer, fd) < 0)
+		return (-1);
+	return (get_line(&file, &*line));
 }

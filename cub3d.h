@@ -225,6 +225,7 @@ void 				ft_calc_dist_draw(t_file *f);
 void				ft_init_bmp(t_file *f, t_bmp *bmp);
 void				ft_save_bmp(t_file *f);
 void 				checkcorrectargument(t_file *f, char *aux);
+void 				freeaux(char **aux);
 
 
 #endif

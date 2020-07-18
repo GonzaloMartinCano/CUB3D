@@ -15,13 +15,13 @@
 static void		ft_set_res(char **res, int j, t_file *f)
 {
 	if (j == 1)
-	{	
+	{
 		f->w = ft_atoi(res[j]);
 		if (f->w > 1920)
 			f->w = 920;
 	}
 	if (j == 2)
-	{	
+	{
 		f->h = ft_atoi(res[j]);
 		if (f->h > 920)
 			f->h = 920;
@@ -38,6 +38,16 @@ int				ft_check_extension(char *str)
 	if (ft_strcmp(extensions, str) != 0)
 		rtn = 1;
 	return (rtn);
+}
+
+void			freeaux(char **aux)
+{
+	int i;
+
+	i = 0;
+	while (aux[i])
+		free(aux[i++]);
+	free(aux);
 }
 
 int				ft_handle_resolution(t_file *f)
@@ -57,14 +67,14 @@ int				ft_handle_resolution(t_file *f)
 		{
 			while (res[j][i])
 			{
-				if (!ft_isdigit(res[j][i]))
+				if (!ft_isdigit(res[j][i++]))
 					return (f->rtn = -1);
-				i++;
 			}
 			i = 0;
 			ft_set_res(res, j, f);
 			j++;
 		}
+		freeaux(res);
 	}
 	return (f->rtn);
 }

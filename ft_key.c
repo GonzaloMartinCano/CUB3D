@@ -24,12 +24,15 @@ int		ft_exitgame(t_file *f)
 	int i;
 
 	i = 0;
-	while(i < 5)
+	while (i < 5)
 	{
 		mlx_destroy_image(f->mlx, f->textures[i]);
 		f->textures[i] = NULL;
 		i++;
 	}
+	free(f->buff);
+	free(f->z_buffer);
+	mlx_destroy_image(f->mlx, f->img);
 	mlx_destroy_window(f->mlx, f->win);
 	exit(EXIT_SUCCESS);
 }

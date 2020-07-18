@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+static void		f_line_plus(t_file *f)
+{
+	while (*f->line)
+		f->line++;
+}
+
 int				ft_handle_path_texture(t_file *f, int i)
 {
 	char	*aux;
@@ -36,8 +42,8 @@ int				ft_handle_path_texture(t_file *f, int i)
 			&f->bits_per_pixel, &f->size_line, &f->endian);
 		close(f->texture[i]);
 	}
-	while (*f->line)
-		f->line++;
+	f_line_plus(f);
+	free(aux);
 	return (f->rtn);
 }
 
@@ -65,13 +71,15 @@ int				ft_handle_path_spritex(t_file *f, int i)
 			&f->bits_per_pixel, &f->size_line, &f->endian);
 		close(f->sprite);
 	}
-	while (*f->line)
-		f->line++;
+	f_line_plus(f);
+	free(aux);
 	return (f->rtn);
 }
 
 int				ft_handle_textures(t_file *f)
 {
+	char *aux;
+
 	while (*f->line)
 	{
 		if (*f->line == 'N' && *(f->line + 1) == 'O')

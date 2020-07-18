@@ -16,18 +16,17 @@ static int	localisdigit(t_file *f, char **test)
 {
 	int		i;
 	int		j;
-	char	**aux;
 
 	i = 0;
 	j = 0;
-	aux = test;
 	while (i <= 2)
 	{
 		j = 0;
-		while (aux[i][j])
+		while (test[i][j])
 		{
-			if ((!ft_isdigit(aux[i][j]) && aux[i][j] != ' ')
-				|| (ft_isdigit(aux[i][j - 1]) && aux[i][j] == ' '))
+			if ((!ft_isdigit(test[i][j]) && test[i][j] != ' '))
+				return (f->rtn = -1);
+			if (j >= 1 && (ft_isdigit(test[i][j - 1]) && test[i][j] == ' '))
 				return (f->rtn = -1);
 			j++;
 		}
@@ -54,8 +53,8 @@ static char	localstrchr(const char *s, int c)
 
 int			ft_handle_cfloor(t_file *f)
 {
-	char **test;
-	char **test2;
+	char	**test2;
+	int		i;
 
 	if (*f->line == 'F' && *f->line)
 	{
@@ -71,14 +70,15 @@ int			ft_handle_cfloor(t_file *f)
 		if ((f->cf[2] = ft_atoi(test2[2])) >= 0)
 			if (f->cf[2] > 255 || f->cf[2] < 0)
 				return ((f->rtn = -1));
+		freeaux(test2);
 	}
 	return (f->rtn);
 }
 
 int			ft_handle_croof(t_file *f)
 {
-	char **test;
-	char **test2;
+	char	**test2;
+	int		i;
 
 	if (*f->line == 'C' && *f->line)
 	{
@@ -94,6 +94,7 @@ int			ft_handle_croof(t_file *f)
 		if ((f->cc[2] = ft_atoi(test2[2])) >= 0)
 			if (f->cc[2] > 255 || f->cc[2] < 0)
 				return ((f->rtn = -1));
+		freeaux(test2);
 	}
 	return (f->rtn);
 }

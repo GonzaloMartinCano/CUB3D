@@ -65,14 +65,17 @@ void		ft_init_file_struct2(t_file *f)
 
 int			ft_read(t_file *f)
 {
-	int br;
+	int		br;
+	char	*line;
 
 	ft_init_file_struct(f);
 	ft_init_file_struct2(f);
-	while ((br = get_next_line(f->fd, &f->line)) >= 0)
+	while ((br = get_next_line(f->fd, &line)) >= 0)
 	{
+		f->line = line;
 		if (ft_read_src_file(f) == -1)
 			return (-1);
+		free(line);
 		if (br == 0)
 			break ;
 	}

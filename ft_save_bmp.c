@@ -16,15 +16,18 @@
 
 void			checkcorrectargument(t_file *f, char *aux)
 {
-	int	len;
+	int		len;
+	char	*aux2;
 
 	len = ft_strlen(aux);
+	aux2 = ft_substr(aux, len - 4, 4);
 	if (len < 5)
 		ft_handle_error("ERROR: IN FILE NAME\n");
-	if (ft_strcmp(".cub", ft_substr(aux, len - 4, 4)) != 4)
+	if (ft_strcmp(".cub", aux2) != 4)
 		ft_handle_error("ERROR: IN FILE NAME\n");
 	if ((f->fd = open(aux, O_RDONLY)) <= 0)
 		ft_handle_error("ERROR: WHEN OPEN FILE\n");
+	free(aux2);
 }
 
 void			ft_init_bmp(t_file *f, t_bmp *bmp)
