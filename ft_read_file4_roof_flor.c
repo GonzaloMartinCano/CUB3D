@@ -56,9 +56,13 @@ int			ft_handle_cfloor(t_file *f)
 	char	**test2;
 	int		i;
 
+	i = 0;
 	if (*f->line == 'F' && *f->line)
 	{
 		test2 = ft_split(++f->line, ',');
+		while (test2[i] != NULL)
+			i++;
+		i == 3 ? i = -1 : ft_handle_error("ERROR: IN FLOOR COLOR");
 		if (localisdigit(f, test2) == -1)
 			ft_handle_error("ERROR: IN FLOOR COLOR");
 		if ((f->cf[0] = ft_atoi(test2[0])) >= 0)
@@ -80,9 +84,13 @@ int			ft_handle_croof(t_file *f)
 	char	**test2;
 	int		i;
 
+	i = 0;
 	if (*f->line == 'C' && *f->line)
 	{
 		test2 = ft_split(++f->line, ',');
+		while (test2[i] != NULL)
+			i++;
+		i == 3 ? i = -1 : ft_handle_error("ERROR in cielingcolor");
 		if (localisdigit(f, test2) == -1)
 			ft_handle_error("ERROR: IN CIELING COLOR");
 		if ((f->cc[0] = ft_atoi(test2[0])) >= 0)

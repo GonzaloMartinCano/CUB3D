@@ -14,8 +14,16 @@
 
 void			ft_handle_error(char *str)
 {
-	ft_printf("%s", str);
+	perror(str);
 	exit(0);
+}
+
+void			ft_handle_error2(char *str, char *aux, t_file *f)
+{
+	if (aux)
+		free(aux);
+	perror(str);
+	ft_exitgame(f);
 }
 
 int				ft_handle_rgb(t_file *f)

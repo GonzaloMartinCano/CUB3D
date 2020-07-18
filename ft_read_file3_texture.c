@@ -26,15 +26,15 @@ int				ft_handle_path_texture(t_file *f, int i)
 	int		h;
 
 	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
+		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	else if (*(f->line + 1) == '/')
 		aux = ft_strdup(f->line);
 	else
-		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
+		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error("ERROR: EXTENSION TEXTURE INVALID\n");
+		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	if ((f->texture[i] = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error("ERROR: OPEN TEXTURE FILE\n");
+		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	else
 	{
 		f->textures[i] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
@@ -55,15 +55,15 @@ int				ft_handle_path_spritex(t_file *f, int i)
 	int		h;
 
 	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error("ERROR: PATH SPRITE TEXTURE INVALID\n");
+		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
 	else if (*(f->line + 1) == '/')
 		aux = ft_strdup(f->line);
 	else
-		ft_handle_error("ERROR: PATH SPRITE TEXTURE INVALID\n");
+		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error("ERROR:  SPRITE EXTENSION TEXTURE INVALID\n");
+		ft_handle_error2("ERROR:  SPRITE EXTENSION TEXTURE INVALID\n", aux, f);
 	if ((f->sprite = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error("ERROR: OPEN SPRITE TEXTURE\n");
+		ft_handle_error2("ERROR: OPEN SPRITE TEXTURE\n", aux, f);
 	else
 	{
 		f->textures[4] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
@@ -78,8 +78,6 @@ int				ft_handle_path_spritex(t_file *f, int i)
 
 int				ft_handle_textures(t_file *f)
 {
-	char *aux;
-
 	while (*f->line)
 	{
 		if (*f->line == 'N' && *(f->line + 1) == 'O')

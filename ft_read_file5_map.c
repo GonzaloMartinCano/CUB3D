@@ -46,9 +46,7 @@ void		ft_filling_matrix(t_file *f, int k, int i, int j)
 			f->sprite_num++;
 	}
 	else if (f->buff[k] == ' ')
-	{
 		f->map[i][j] = 4;
-	}
 	else if (f->buff[k] == 'N' || f->buff[k] == 'S'
 		|| f->buff[k] == 'E' || f->buff[k] == 'W')
 	{
@@ -64,6 +62,8 @@ void		ft_filling_matrix(t_file *f, int k, int i, int j)
 			f->currentpos.y = j + 0.5;
 		}
 	}
+	else
+		ft_handle_error("YUJU");
 }
 
 int			alloc_map(t_file *f)

@@ -25,7 +25,6 @@
 # include <math.h>
 # include <X11/Xlib.h>
 
-
 /*----------TAMAÑOS TEXTURAS PREDEF---------*/
 
 # define TEXTURE_WIDTH 64
@@ -193,6 +192,7 @@ int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
 void				ft_handle_colors(t_file *f);
 void				ft_handle_error(char *str);
+void				ft_handle_error2(char *str, char *aux, t_file *f);
 int					ft_handle_rgb(t_file *f);
 int					ft_handle_resolution(t_file *f);
 int					ft_check_extension(char *str);
