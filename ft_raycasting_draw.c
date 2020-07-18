@@ -14,38 +14,38 @@
 
 static void		ft_calcamera(t_file *f, int x)
 {
-	f->m.mapX = (int)f->currentpos.x;
-	f->m.mapY = (int)f->currentpos.y;
-	f->m.cameraX = (2 * x / (double)f->w) - 1;
-	f->m.rayDir.x = f->m.dir.x + f->m.plane.x * f->m.cameraX;
-	f->m.rayDir.y = f->m.dir.y + f->m.plane.y * f->m.cameraX;
-	f->m.deltaDist.x = fabs(1 / f->m.rayDir.x);
-	f->m.deltaDist.y = fabs(1 / f->m.rayDir.y);
+	f->m.mapx = (int)f->currentpos.x;
+	f->m.mapy = (int)f->currentpos.y;
+	f->m.camerax = (2 * x / (double)f->w) - 1;
+	f->m.raydir.x = f->m.dir.x + f->m.plane.x * f->m.camerax;
+	f->m.raydir.y = f->m.dir.y + f->m.plane.y * f->m.camerax;
+	f->m.deltadist.x = fabs(1 / f->m.raydir.x);
+	f->m.deltadist.y = fabs(1 / f->m.raydir.y);
 }
 
 static int		ft_calcstep(t_file *f)
 {
-	if (f->m.rayDir.x < 0)
+	if (f->m.raydir.x < 0)
 	{
-		f->m.stepX = -1;
-		f->m.sideDist.x = (f->currentpos.x - f->m.mapX) * f->m.deltaDist.x;
+		f->m.stepx = -1;
+		f->m.sidedist.x = (f->currentpos.x - f->m.mapx) * f->m.deltadist.x;
 	}
 	else
 	{
-		f->m.stepX = 1;
-		f->m.sideDist.x = (f->m.mapX + 1.0 - f->currentpos.x)
-			* f->m.deltaDist.x;
+		f->m.stepx = 1;
+		f->m.sidedist.x = (f->m.mapx + 1.0 - f->currentpos.x)
+			* f->m.deltadist.x;
 	}
-	if (f->m.rayDir.y < 0)
+	if (f->m.raydir.y < 0)
 	{
-		f->m.stepY = -1;
-		f->m.sideDist.y = (f->currentpos.y - f->m.mapY) * f->m.deltaDist.y;
+		f->m.stepy = -1;
+		f->m.sidedist.y = (f->currentpos.y - f->m.mapy) * f->m.deltadist.y;
 	}
 	else
 	{
-		f->m.stepY = 1;
-		f->m.sideDist.y = (f->m.mapY + 1.0 - f->currentpos.y)
-			* f->m.deltaDist.y;
+		f->m.stepy = 1;
+		f->m.sidedist.y = (f->m.mapy + 1.0 - f->currentpos.y)
+			* f->m.deltadist.y;
 	}
 }
 
@@ -55,17 +55,17 @@ static void		ft_draw_line(t_file *f, int x)
 	int color;
 
 	i = 0;
-	while (i < f->m.drawStart)
+	while (i < f->m.drawstart)
 	{
 		*(f->data_img + (i * f->w) + x) = f->ccieling;
 		i++;
 	}
-	while (i <= f->m.drawEnd)
+	while (i <= f->m.drawend)
 	{
-		f->m.textY = (int)f->m.textpos & (TEXTURE_HEIGHT - 1);
+		f->m.texty = (int)f->m.textpos & (TEXTURE_HEIGHT - 1);
 		f->m.textpos += f->m.textstep;
-		color = f->tdata[f->m.textside][TEXTURE_HEIGHT * f->m.textY
-			+ f->m.textX];
+		color = f->tdata[f->m.textside][TEXTURE_HEIGHT * f->m.texty
+			+ f->m.textx];
 		*(f->data_img + (i * f->w) + x) = color;
 		i++;
 	}
@@ -91,7 +91,7 @@ int				ft_draw(t_file *f)
 		ft_color_side(f);
 		ft_config_texture(f);
 		ft_draw_line(f, x);
-		f->z_buffer[x] = f->m.perpWallDist;
+		f->z_buffer[x] = f->m.perpwalldist;
 		x++;
 	}
 }

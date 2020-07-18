@@ -17,8 +17,8 @@ void		ft_color_side(t_file *f)
 	double dx;
 	double dy;
 
-	dx = f->m.mapX - f->currentpos.x;
-	dy = f->m.mapY - f->currentpos.y;
+	dx = f->m.mapx - f->currentpos.x;
+	dy = f->m.mapy - f->currentpos.y;
 	if (dx < 0 && f->m.side == 0)
 		f->m.textside = 3;
 	if (dx > 0 && f->m.side == 0)
@@ -31,25 +31,25 @@ void		ft_color_side(t_file *f)
 
 void		ft_color(t_file *f)
 {
-	if (f->map[f->m.mapX][f->m.mapY] == 1)
+	if (f->map[f->m.mapx][f->m.mapy] == 1)
 		ft_color_side(f);
-	if (f->map[f->m.mapX][f->m.mapY] == 2)
+	if (f->map[f->m.mapx][f->m.mapy] == 2)
 		f->m.color = 16712447;
 }
 
 void		ft_config_texture(t_file *f)
 {
 	if (f->m.side == 0)
-		f->m.wallX = f->currentpos.y + f->m.perpWallDist * f->m.rayDir.y;
+		f->m.wallx = f->currentpos.y + f->m.perpwalldist * f->m.raydir.y;
 	else
-		f->m.wallX = f->currentpos.x + f->m.perpWallDist * f->m.rayDir.x;
-	f->m.wallX -= floor(f->m.wallX);
-	f->m.textX = (int)(f->m.wallX * (double)TEXTURE_WIDTH);
-	if (f->m.side == 0 && f->m.rayDir.x > 0)
-		f->m.textX = TEXTURE_WIDTH - f->m.textX - 1;
-	if (f->m.side == 1 && f->m.rayDir.y < 0)
-		f->m.textX = TEXTURE_WIDTH - f->m.textX - 1;
-	f->m.textstep = 1.0 * TEXTURE_HEIGHT / f->m.lineHeight;
-	f->m.textpos = (f->m.drawStart - f->h / 2 + f->m.lineHeight / 2)
+		f->m.wallx = f->currentpos.x + f->m.perpwalldist * f->m.raydir.x;
+	f->m.wallx -= floor(f->m.wallx);
+	f->m.textx = (int)(f->m.wallx * (double)TEXTURE_WIDTH);
+	if (f->m.side == 0 && f->m.raydir.x > 0)
+		f->m.textx = TEXTURE_WIDTH - f->m.textx - 1;
+	if (f->m.side == 1 && f->m.raydir.y < 0)
+		f->m.textx = TEXTURE_WIDTH - f->m.textx - 1;
+	f->m.textstep = 1.0 * TEXTURE_HEIGHT / f->m.lineheight;
+	f->m.textpos = (f->m.drawstart - f->h / 2 + f->m.lineheight / 2)
 		* f->m.textstep;
 }

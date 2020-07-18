@@ -15,46 +15,46 @@
 
 int		ft_movementud(t_file *f)
 {
-	if (f->m.W > 0)
+	if (f->m.w > 0)
 	{
 		if (ft_canmove(f->map[(int)(f->currentpos.x + f->m.dir.x
-			* f->m.moveSpeed)][(int)f->currentpos.y]))
-			f->currentpos.x += f->m.dir.x * f->m.moveSpeed;
+			* f->m.movespeed)][(int)f->currentpos.y]))
+			f->currentpos.x += f->m.dir.x * f->m.movespeed;
 		if (ft_canmove(f->map[(int)f->currentpos.x][(int)
-			(f->currentpos.y + f->m.dir.y * f->m.moveSpeed)]))
-			f->currentpos.y += f->m.dir.y * f->m.moveSpeed;
+			(f->currentpos.y + f->m.dir.y * f->m.movespeed)]))
+			f->currentpos.y += f->m.dir.y * f->m.movespeed;
 	}
-	if (f->m.S > 0)
+	if (f->m.s > 0)
 	{
 		if (ft_canmove(f->map[(int)(f->currentpos.x - f->m.dir.x
-			* f->m.moveSpeed)][(int)f->currentpos.y]))
-			f->currentpos.x -= f->m.dir.x * f->m.moveSpeed;
+			* f->m.movespeed)][(int)f->currentpos.y]))
+			f->currentpos.x -= f->m.dir.x * f->m.movespeed;
 		if (ft_canmove(f->map[(int)f->currentpos.x][(int)
-			(f->currentpos.y - f->m.dir.y * f->m.moveSpeed)]))
-			f->currentpos.y -= f->m.dir.y * f->m.moveSpeed;
+			(f->currentpos.y - f->m.dir.y * f->m.movespeed)]))
+			f->currentpos.y -= f->m.dir.y * f->m.movespeed;
 	}
 	return (0);
 }
 
 int		ft_movementlr(t_file *f)
 {
-	if (f->m.A > 0)
+	if (f->m.a > 0)
 	{
 		if (ft_canmove(f->map[(int)(f->currentpos.x)]
-			[(int)(f->currentpos.y + f->m.dir.x * f->m.moveSpeed)]))
-			f->currentpos.y += f->m.dir.x * f->m.moveSpeed;
+			[(int)(f->currentpos.y + f->m.dir.x * f->m.movespeed)]))
+			f->currentpos.y += f->m.dir.x * f->m.movespeed;
 		if (ft_canmove(f->map[(int)(f->currentpos.x - f->m.dir.y
-			* f->m.moveSpeed)][(int)f->currentpos.y]))
-			f->currentpos.x -= f->m.dir.y * f->m.moveSpeed;
+			* f->m.movespeed)][(int)f->currentpos.y]))
+			f->currentpos.x -= f->m.dir.y * f->m.movespeed;
 	}
-	if (f->m.D > 0)
+	if (f->m.d > 0)
 	{
 		if (ft_canmove(f->map[(int)(f->currentpos.x)]
-			[(int)(f->currentpos.y - f->m.dir.x * f->m.moveSpeed)]))
-			f->currentpos.y -= f->m.dir.x * f->m.moveSpeed;
+			[(int)(f->currentpos.y - f->m.dir.x * f->m.movespeed)]))
+			f->currentpos.y -= f->m.dir.x * f->m.movespeed;
 		if (ft_canmove(f->map[(int)(f->currentpos.x + f->m.dir.y
-			* f->m.moveSpeed)][(int)f->currentpos.y]))
-			f->currentpos.x += f->m.dir.y * f->m.moveSpeed;
+			* f->m.movespeed)][(int)f->currentpos.y]))
+			f->currentpos.x += f->m.dir.y * f->m.movespeed;
 	}
 	return (0);
 }
@@ -64,19 +64,19 @@ int		ft_rotationleft(t_file *f)
 	t_vector auxdir;
 	t_vector auxplane;
 
-	if (f->m.L > 0)
+	if (f->m.l > 0)
 	{
 		auxplane.x = f->m.plane.x;
 		auxdir.x = f->m.dir.x;
-		f->m.dir.x = f->m.dir.x * cos(f->m.rotSpeed)
-			- f->m.dir.y * sin(f->m.rotSpeed);
-		f->m.dir.y = auxdir.x * sin(f->m.rotSpeed)
-			+ f->m.dir.y * cos(f->m.rotSpeed);
+		f->m.dir.x = f->m.dir.x * cos(f->m.rotspeed)
+			- f->m.dir.y * sin(f->m.rotspeed);
+		f->m.dir.y = auxdir.x * sin(f->m.rotspeed)
+			+ f->m.dir.y * cos(f->m.rotspeed);
 		auxplane.x = f->m.plane.x;
-		f->m.plane.x = f->m.plane.x * cos(f->m.rotSpeed)
-			- f->m.plane.y * sin(f->m.rotSpeed);
-		f->m.plane.y = auxplane.x * sin(f->m.rotSpeed)
-			+ f->m.plane.y * cos(f->m.rotSpeed);
+		f->m.plane.x = f->m.plane.x * cos(f->m.rotspeed)
+			- f->m.plane.y * sin(f->m.rotspeed);
+		f->m.plane.y = auxplane.x * sin(f->m.rotspeed)
+			+ f->m.plane.y * cos(f->m.rotspeed);
 	}
 }
 
@@ -85,19 +85,19 @@ int		ft_rotationright(t_file *f)
 	t_vector auxdir;
 	t_vector auxplane;
 
-	if (f->m.R > 0)
+	if (f->m.r > 0)
 	{
 		auxplane.x = f->m.plane.x;
 		auxdir.x = f->m.dir.x;
-		f->m.dir.x = f->m.dir.x * cos(-f->m.rotSpeed)
-			- f->m.dir.y * sin(-f->m.rotSpeed);
-		f->m.dir.y = auxdir.x * sin(-f->m.rotSpeed)
-			+ f->m.dir.y * cos(-f->m.rotSpeed);
+		f->m.dir.x = f->m.dir.x * cos(-f->m.rotspeed)
+			- f->m.dir.y * sin(-f->m.rotspeed);
+		f->m.dir.y = auxdir.x * sin(-f->m.rotspeed)
+			+ f->m.dir.y * cos(-f->m.rotspeed);
 		auxplane.x = f->m.plane.x;
-		f->m.plane.x = f->m.plane.x * cos(-f->m.rotSpeed)
-			- f->m.plane.y * sin(-f->m.rotSpeed);
-		f->m.plane.y = auxplane.x * sin(-f->m.rotSpeed)
-			+ f->m.plane.y * cos(-f->m.rotSpeed);
+		f->m.plane.x = f->m.plane.x * cos(-f->m.rotspeed)
+			- f->m.plane.y * sin(-f->m.rotspeed);
+		f->m.plane.y = auxplane.x * sin(-f->m.rotspeed)
+			+ f->m.plane.y * cos(-f->m.rotspeed);
 	}
 	return (0);
 }

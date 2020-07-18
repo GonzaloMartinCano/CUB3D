@@ -32,8 +32,8 @@ void		ft_init_file_struct(t_file *f)
 	f->c_f = ft_strdup("");
 	f->mapreaded = -1;
 	f->buff = ft_strdup("");
-	f->nFil = 0;
-	f->nColMax = 0;
+	f->nfil = 0;
+	f->ncolmax = 0;
 	f->dir = '\0';
 }
 
@@ -41,24 +41,24 @@ void		ft_init_file_struct2(t_file *f)
 {
 	f->pos[0] = 1;
 	f->pos[1] = 1;
-	f->m.stepX = 0;
-	f->m.stepY = 0;
-	f->m.sideDist.x = 0;
-	f->m.sideDist.y = 0;
+	f->m.stepx = 0;
+	f->m.stepy = 0;
+	f->m.sidedist.x = 0;
+	f->m.sidedist.y = 0;
 	f->m.dir.x = 0.0;
 	f->m.dir.y = 0.0;
-	f->m.rotSpeed = 0.03;
-	f->m.moveSpeed = 0.05;
+	f->m.rotspeed = 0.03;
+	f->m.movespeed = 0.05;
 	f->m.side = 0;
-	f->m.W = 0;
-	f->m.S = 0;
-	f->m.A = 0;
-	f->m.D = 0;
-	f->m.L = 0;
-	f->m.R = 0;
+	f->m.w = 0;
+	f->m.s = 0;
+	f->m.a = 0;
+	f->m.d = 0;
+	f->m.l = 0;
+	f->m.r = 0;
 	f->m.textside = 0;
-	f->m.textY = 0;
-	f->m.textX = 0;
+	f->m.texty = 0;
+	f->m.textx = 0;
 	f->m.textstep = 0;
 	f->sprite_num = 0;
 }
@@ -73,6 +73,8 @@ int			ft_read(t_file *f)
 	while ((br = get_next_line(f->fd, &line)) >= 0)
 	{
 		f->line = line;
+		if (!(ft_strchr("NWESRFC102 ", f->line[0])))
+			ft_handle_error("ERROR: NOT INIT PLAYER\n");
 		if (ft_read_src_file(f) == -1)
 			return (-1);
 		free(line);

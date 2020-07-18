@@ -30,9 +30,9 @@ int			ft_handle_map_read(t_file *f)
 		temp = ft_strjoin(f->buff, "\n");
 		free(f->buff);
 		f->buff = temp;
-		if (f->nColMax == 0 || f->nColMax < i)
-			f->nColMax = i;
-		f->nFil++;
+		if (f->ncolmax == 0 || f->ncolmax < i)
+			f->ncolmax = i;
+		f->nfil++;
 	}
 	return (f->rtn);
 }
@@ -73,16 +73,16 @@ int			alloc_map(t_file *f)
 	i[0] = 0;
 	i[1] = 0;
 	i[2] = 0;
-	if (!(f->map = ft_calloc(f->nFil, sizeof(int *))))
+	if (!(f->map = ft_calloc(f->nfil, sizeof(int *))))
 		return (0);
 	else
 	{
-		while (i[0] < f->nFil && f->buff[i[2]])
+		while (i[0] < f->nfil && f->buff[i[2]])
 		{
-			if (!(f->map[i[0]] = ft_calloc(f->nColMax, sizeof(int *))))
+			if (!(f->map[i[0]] = ft_calloc(f->ncolmax, sizeof(int *))))
 				return (0);
 			i[1] = 0;
-			while (i[1] < f->nColMax && f->buff[i[2]] != '\n')
+			while (i[1] < f->ncolmax && f->buff[i[2]] != '\n')
 			{
 				ft_filling_matrix(f, i[2], i[0], i[1]);
 				i[2]++;

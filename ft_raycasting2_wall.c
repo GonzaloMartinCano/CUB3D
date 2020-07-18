@@ -19,19 +19,19 @@ void		ft_hit_wall(t_file *f)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (f->m.sideDist.x < f->m.sideDist.y)
+		if (f->m.sidedist.x < f->m.sidedist.y)
 		{
-			f->m.sideDist.x += f->m.deltaDist.x;
-			f->m.mapX += f->m.stepX;
+			f->m.sidedist.x += f->m.deltadist.x;
+			f->m.mapx += f->m.stepx;
 			f->m.side = 0;
 		}
 		else
 		{
-			f->m.sideDist.y += f->m.deltaDist.y;
-			f->m.mapY += f->m.stepY;
+			f->m.sidedist.y += f->m.deltadist.y;
+			f->m.mapy += f->m.stepy;
 			f->m.side = 1;
 		}
-		if (f->map[f->m.mapX][f->m.mapY] == 1)
+		if (f->map[f->m.mapx][f->m.mapy] == 1)
 			hit = 1;
 	}
 }
@@ -39,16 +39,16 @@ void		ft_hit_wall(t_file *f)
 void		ft_wall_height(t_file *f)
 {
 	if (f->m.side == 0)
-		f->m.perpWallDist = (f->m.mapX - f->currentpos.x
-			+ (1 - f->m.stepX) / 2) / f->m.rayDir.x;
+		f->m.perpwalldist = (f->m.mapx - f->currentpos.x
+			+ (1 - f->m.stepx) / 2) / f->m.raydir.x;
 	else
-		f->m.perpWallDist = (f->m.mapY - f->currentpos.y
-			+ (1 - f->m.stepY) / 2) / f->m.rayDir.y;
-	f->m.lineHeight = (int)(f->h / f->m.perpWallDist);
-	f->m.drawStart = (-f->m.lineHeight / 2) + f->h / 2;
-	if (f->m.drawStart < 0)
-		f->m.drawStart = 0;
-	f->m.drawEnd = (f->m.lineHeight / 2) + f->h / 2;
-	if (f->m.drawEnd >= f->h || f->m.drawEnd == 0)
-		f->m.drawEnd = f->h - 1;
+		f->m.perpwalldist = (f->m.mapy - f->currentpos.y
+			+ (1 - f->m.stepy) / 2) / f->m.raydir.y;
+	f->m.lineheight = (int)(f->h / f->m.perpwalldist);
+	f->m.drawstart = (-f->m.lineheight / 2) + f->h / 2;
+	if (f->m.drawstart < 0)
+		f->m.drawstart = 0;
+	f->m.drawend = (f->m.lineheight / 2) + f->h / 2;
+	if (f->m.drawend >= f->h || f->m.drawend == 0)
+		f->m.drawend = f->h - 1;
 }

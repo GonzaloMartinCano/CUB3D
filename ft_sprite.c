@@ -39,10 +39,10 @@ void			ft_calc_pos(t_file *f)
 
 	i = 0;
 	k = 0;
-	while (i < f->nColMax)
+	while (i < f->ncolmax)
 	{
 		j = 0;
-		while (j < f->nFil)
+		while (j < f->nfil)
 		{
 			if (f->map[j][i] == 2)
 			{

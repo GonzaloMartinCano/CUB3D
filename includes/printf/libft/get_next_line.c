@@ -16,6 +16,7 @@ static int	get_line(char **file, char **line)
 {
 	int		i;
 	char	*temp;
+
 	i = 0;
 	while (*(*file + i) != '\0' && *(*file + i) != '\n')
 		i++;
@@ -35,9 +36,11 @@ static int	get_line(char **file, char **line)
 	}
 	return (1);
 }
+
 static int	read_to_buffer(int ret, char **file, char **buffer, int fd)
 {
 	char *aux;
+
 	while (ret == BUFFER_SIZE)
 	{
 		if (ft_strchr(*file, '\n'))
@@ -57,6 +60,7 @@ static int	read_to_buffer(int ret, char **file, char **buffer, int fd)
 	free(*buffer);
 	return (0);
 }
+
 static int	empty_line(int ret, char **line, char **buffer)
 {
 	if (ret == 0)
@@ -71,12 +75,13 @@ static int	empty_line(int ret, char **line, char **buffer)
 		return (-1);
 	}
 }
+
 int			get_next_line(int fd, char **line)
 {
 	int			ret;
 	char		*buffer;
-	static char *file;
-	
+	static char	*file;
+
 	ret = BUFFER_SIZE;
 	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))) || !line)
 		return (-1);

@@ -42,17 +42,17 @@ int		ft_key_press(int key, t_file *f)
 	if (key == KEY_ESC)
 		ft_exitgame(f);
 	if (key == KEY_W)
-		f->m.W = 1;
+		f->m.w = 1;
 	if (key == KEY_S)
-		f->m.S = 1;
+		f->m.s = 1;
 	if (key == KEY_A)
-		f->m.A = 1;
+		f->m.a = 1;
 	if (key == KEY_D)
-		f->m.D = 1;
+		f->m.d = 1;
 	if (key == KEY_LEFT)
-		f->m.L = 1;
+		f->m.l = 1;
 	if (key == KEY_RIGHT)
-		f->m.R = 1;
+		f->m.r = 1;
 	return (0);
 }
 
@@ -61,16 +61,16 @@ int		ft_key_release(int key, t_file *f)
 	if (key == KEY_ESC)
 		ft_exitgame(f);
 	if (key == KEY_W)
-		f->m.W = 0;
+		f->m.w = 0;
 	if (key == KEY_S)
-		f->m.S = 0;
+		f->m.s = 0;
 	if (key == KEY_A)
-		f->m.A = 0;
+		f->m.a = 0;
 	if (key == KEY_D)
-		f->m.D = 0;
+		f->m.d = 0;
 	if (key == KEY_LEFT)
-		f->m.L = 0;
+		f->m.l = 0;
 	if (key == KEY_RIGHT)
-		f->m.R = 0;
+		f->m.r = 0;
 	return (0);
 }
