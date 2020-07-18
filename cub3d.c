@@ -73,8 +73,6 @@ int			ft_read(t_file *f)
 	while ((br = get_next_line(f->fd, &line)) >= 0)
 	{
 		f->line = line;
-		if (!(ft_strchr("NWESRFC102 ", f->line[0])))
-			ft_handle_error("ERROR: NOT INIT PLAYER\n");
 		if (ft_read_src_file(f) == -1)
 			return (-1);
 		free(line);
