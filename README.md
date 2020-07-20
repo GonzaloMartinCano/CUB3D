@@ -3,10 +3,17 @@ Este proyecto está inspirado en el juego mundialmente conocido, considerado com
 
 Para compilar:
 
-  make re
+    make re
   
 Para ejecutar, necesitamos pasar un archivo .cub válido con los datos del mapa  (tenemos dos ejemplos para cargar):
 
-  ./Cub3D tx.cub
+    ./Cub3D tx.cub
   
-Tanto minilibx como el resto de librerias referenciadas ya están preparadas para usarse
+*Tanto minilibx como el resto de librerias referenciadas ya están preparadas para usarse
+
+Referencias:
+
+      https://lodev.org/cgtutor/raycasting.html
+      https://qst0.github.io/ft_libgfx/man_mlx_loop.html
+      https://harm-smits.github.io/42docs/libs/minilibx
+      https://asidesigned.com/project-wolf3d.html
