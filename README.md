@@ -1,7 +1,7 @@
 # CUB3D_FT
 Este proyecto está inspirado en el juego mundialmente conocido, considerado como el primer FPS jamás realizado. Le permitirá explorar la técnica del ray-casting. El objetivo será crear una vista dinámica dentro de un mapa, en el que poder observar diferentes texturas para muros, objetos, etc.
 
-https://raw.githubusercontent.com/Zalillo18/CUB3D/master/pantalla_inicio.png)
+https://raw.githubusercontent.com/Zalillo18/CUB3D/master/pantalla_inicio.png
 
 Para compilar:
 
