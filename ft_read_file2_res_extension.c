@@ -35,6 +35,8 @@ int				ft_check_extension(char *str)
 
 	rtn = -1;
 	extensions = ".xpm";
+	if (!str)
+		ft_handle_error("ERROR EXTENSION");
 	if (ft_strcmp(extensions, str) != 0)
 		rtn = 1;
 	return (rtn);

@@ -12,6 +12,20 @@
 
 #include "cub3d.h"
 
+char			*first_compro(t_file *f, char *aux)
+{
+	if ((f->line = ft_strchr(f->line, '.')))
+	{
+		if (*(f->line + 1) == '/')
+			aux = f->line;
+		else
+			ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
+	}
+	else
+		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
+	return (aux);
+}
+
 int				ft_handle_path_texture(t_file *f, int i)
 {
 	char	*aux;
@@ -19,16 +33,12 @@ int				ft_handle_path_texture(t_file *f, int i)
 	int		w;
 	int		h;
 
-	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
-	else if (*(f->line + 1) == '/')
-		aux = f->line;
-	else
-		f->rtn = 1;
-	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
+	aux = first_compro(f, aux);
+	aux++;
+	if (ft_check_extension((ext = ft_strchr(aux, '.'))) < 0)
+		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
 	if ((f->texture[i] = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
+		ft_handle_error("ERROR: PATH TEXTURE INVALID\n");
 	else
 	{
 		f->countmap[i + 1]++;
@@ -47,16 +57,10 @@ int				ft_handle_path_spritex(t_file *f, int i)
 	int		w;
 	int		h;
 
-	if (!(f->line = ft_strchr(f->line, '.')))
-		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
-	else if (*(f->line + 1) == '/')
-		aux = f->line;
-	else
-		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
-	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
-		ft_handle_error2("ERROR:  SPRITE EXTENSION TEXTURE INVALID\n", aux, f);
+	aux = first_compro(f, aux);
+	aux++;
 	if ((f->sprite = open(--aux, O_RDONLY)) < 0)
-		ft_handle_error2("ERROR: OPEN SPRITE TEXTURE\n", aux, f);
+		ft_handle_error("ERROR: OPEN SPRITE TEXTURE\n");
 	else
 	{
 		f->textures[4] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
