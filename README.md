@@ -5,10 +5,11 @@ Para compilar:
 
     make re
   
-Para ejecutar, necesitamos pasar un archivo .cub válido con los datos del mapa  (tenemos dos ejemplos para cargar):
+Para ejecutar, necesitamos pasar un archivo de configuración .cub válido con los datos del mapa (resolución, texturas, mapa, etc)(tenemos dos ejemplos para cargar, tx.cub y tx2.cub):
 
     ./Cub3D tx.cub
-  
+ 
+*Podemos crear un nuevo archivo de configuración o cambiar el existente para crear un nuevo mapa, pero debemos respetar las reglas de configuración (en el subject podemos encontrar los requisitos, o podemos probar y el propio programa nos dirá el error y que debemos módificar). 
 *Tanto minilibx como el resto de librerias referenciadas ya están preparadas para usarse
 
 Referencias:
