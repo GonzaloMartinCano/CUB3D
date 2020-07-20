@@ -11,7 +11,8 @@ Para ejecutar, necesitamos pasar un archivo de configuración .cub válido con l
 
     ./Cub3D tx.cub
  
-*Podemos crear un nuevo archivo de configuración o cambiar el existente para crear un nuevo mapa, pero debemos respetar las reglas de configuración (en el subject podemos encontrar los requisitos, o podemos probar y el propio programa nos dirá el error y que debemos módificar). 
+*Podemos crear un nuevo archivo de configuración o cambiar el existente para crear un nuevo mapa, pero debemos respetar las reglas de configuración (en el subject podemos encontrar los requisitos, o podemos probar y el propio programa nos dirá el error y que debemos módificar).
+
 *Tanto minilibx como el resto de librerias referenciadas ya están preparadas para usarse
 
 Referencias:
