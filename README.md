@@ -21,3 +21,5 @@ Referencias:
       https://qst0.github.io/ft_libgfx/man_mlx_loop.html
       https://harm-smits.github.io/42docs/libs/minilibx
       https://asidesigned.com/project-wolf3d.html
+      
+@javiercervilla
