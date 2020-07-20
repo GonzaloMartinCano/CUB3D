@@ -26,6 +26,7 @@
 # include <X11/Xlib.h>
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+# define SIZE 640
 # define VMOVE 200
 # define VDIV 1
 # define UDIV 1
@@ -153,6 +154,7 @@ typedef struct		s_readfile
 	int			sprite_num;
 	int			movescreen;
 	int			bmp_active;
+	int			countmap[8];
 	t_moves		m;
 }					t_file;
 
@@ -178,6 +180,8 @@ typedef struct		s_bmp
 
 int					ft_read(t_file *f);
 int					ft_read_src_file(t_file *f);
+void				ft_init_file_struct(t_file *f);
+void				ft_init_file_struct2(t_file *f);
 void				ft_handle_colors(t_file *f);
 void				ft_handle_error(char *str);
 void				ft_handle_error2(char *str, char *aux, t_file *f);
@@ -214,5 +218,7 @@ void				ft_init_bmp(t_file *f, t_bmp *bmp);
 void				ft_save_bmp(t_file *f);
 void				checkcorrectargument(t_file *f, char *aux);
 void				freeaux(char **aux);
+int					ft_check_config(t_file *f);
+int					ft_isspace(char *s);
 
 #endif

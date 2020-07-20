@@ -30,5 +30,5 @@ int		map_check(int row, int col, t_file *f)
 	ok = ok == 0 ? map_check(row, col + 1, f) : ok;
 	ok = ok == 0 ? map_check(row - 1, col, f) : ok;
 	ok = ok == 0 ? map_check(row + 1, col, f) : ok;
-	return (ok);
+	return (f->rtn = ok);
 }

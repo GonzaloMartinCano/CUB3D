@@ -56,24 +56,24 @@ int				ft_handle_resolution(t_file *f)
 	int		i;
 	int		j;
 
-	if (*f->line == 'R' && *f->line)
+	if (f->line[0] == 'R' && f->line[1] == ' ')
 	{
-		i = 0;
 		j = 1;
 		res = ft_split(f->line, ' ');
 		if (res[3] != 0)
 			return (f->rtn = -1);
 		while (j <= 2)
 		{
+			i = 0;
 			while (res[j][i])
 			{
 				if (!ft_isdigit(res[j][i++]))
 					return (f->rtn = -1);
 			}
-			i = 0;
 			ft_set_res(res, j, f);
 			j++;
 		}
+		f->countmap[0]++;
 		freeaux(res);
 	}
 	return (f->rtn);

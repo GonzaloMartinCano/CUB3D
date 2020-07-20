@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-static void		f_line_plus(t_file *f)
-{
-	while (*f->line)
-		f->line++;
-}
-
 int				ft_handle_path_texture(t_file *f, int i)
 {
 	char	*aux;
@@ -28,22 +22,21 @@ int				ft_handle_path_texture(t_file *f, int i)
 	if (!(f->line = ft_strchr(f->line, '.')))
 		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	else if (*(f->line + 1) == '/')
-		aux = ft_strdup(f->line);
+		aux = f->line;
 	else
-		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
+		f->rtn = 1;
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
 		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	if ((f->texture[i] = open(--aux, O_RDONLY)) < 0)
 		ft_handle_error2("ERROR: PATH TEXTURE INVALID\n", aux, f);
 	else
 	{
+		f->countmap[i + 1]++;
 		f->textures[i] = mlx_xpm_file_to_image(f->mlx, aux, &w, &h);
 		f->tdata[i] = (int *)mlx_get_data_addr(f->textures[i],
 			&f->bits_per_pixel, &f->size_line, &f->endian);
 		close(f->texture[i]);
 	}
-	f_line_plus(f);
-	free(aux);
 	return (f->rtn);
 }
 
@@ -57,7 +50,7 @@ int				ft_handle_path_spritex(t_file *f, int i)
 	if (!(f->line = ft_strchr(f->line, '.')))
 		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
 	else if (*(f->line + 1) == '/')
-		aux = ft_strdup(f->line);
+		aux = f->line;
 	else
 		ft_handle_error2("ERROR: PATH SPRITE TEXTURE INVALID\n", aux, f);
 	if (ft_check_extension((ext = ft_strchr(++aux, '.'))) < 0)
@@ -71,30 +64,23 @@ int				ft_handle_path_spritex(t_file *f, int i)
 			&f->bits_per_pixel, &f->size_line, &f->endian);
 		close(f->sprite);
 	}
-	f_line_plus(f);
-	free(aux);
 	return (f->rtn);
 }
 
 int				ft_handle_textures(t_file *f)
 {
-	while (*f->line)
-	{
-		if (*f->line == 'N' && *(f->line + 1) == 'O')
-			if (ft_handle_path_texture(f, 0) == -1)
-				ft_handle_error("Text NO ERROR");
-		if (*f->line == 'S' && *(f->line + 1) == 'O')
-			if (ft_handle_path_texture(f, 1) == -1)
-				ft_handle_error("Text SO ERROR");
-		if (*f->line == 'W' && *(f->line + 1) == 'E')
-			if (ft_handle_path_texture(f, 2) == -1)
-				ft_handle_error("Text WE ERROR");
-		if (*f->line == 'E' && *(f->line + 1) == 'A')
-			if (ft_handle_path_texture(f, 3) == -1)
-				ft_handle_error("Text EA ERROR");
-		if (*f->line)
-			f->line++;
-	}
+	if (*f->line == 'N' && *(f->line + 1) == 'O')
+		if (ft_handle_path_texture(f, 0) == -1)
+			ft_handle_error("Text NO ERROR");
+	if (*f->line == 'S' && *(f->line + 1) == 'O')
+		if (ft_handle_path_texture(f, 1) == -1)
+			ft_handle_error("Text SO ERROR");
+	if (*f->line == 'W' && *(f->line + 1) == 'E')
+		if (ft_handle_path_texture(f, 2) == -1)
+			ft_handle_error("Text WE ERROR");
+	if (*f->line == 'E' && *(f->line + 1) == 'A')
+		if (ft_handle_path_texture(f, 3) == -1)
+			ft_handle_error("Text EA ERROR");
 	return (f->rtn);
 }
 
@@ -111,6 +97,8 @@ int				ft_handle_spritex(t_file *f)
 		if (*f->line == 'S' && *(f->line + 1) == ' ')
 			if (ft_handle_path_spritex(f, i) == -1)
 				ft_handle_error("Text S ERROR");
+			else
+				f->countmap[5]++;
 		if (*f->line)
 			f->line++;
 	}

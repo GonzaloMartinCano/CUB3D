@@ -12,6 +12,17 @@
 
 #include "cub3d.h"
 
+int			ft_check_config(t_file *f)
+{
+	int		i;
+
+	i = -1;
+	while (i < 8)
+		if (f->countmap[++i] > 1)
+			return (-1);
+	return (0);
+}
+
 int			ft_handle_map_read(t_file *f)
 {
 	int		i;
@@ -20,6 +31,8 @@ int			ft_handle_map_read(t_file *f)
 	i = 0;
 	if (ft_isdigit(f->line[0]) || f->line[0] == ' ')
 	{
+		if (ft_check_config(f) == -1)
+			ft_handle_error("LINEA DUPLICADA");
 		i = ft_strlen(f->line);
 		if (f->buff == NULL)
 			temp = ft_strdup(f->line);
@@ -70,27 +83,27 @@ int			alloc_map(t_file *f)
 {
 	int i[3];
 
-	i[0] = 0;
-	i[1] = 0;
+	i[0] = -1;
 	i[2] = 0;
 	if (!(f->map = ft_calloc(f->nfil, sizeof(int *))))
 		return (0);
 	else
 	{
-		while (i[0] < f->nfil && f->buff[i[2]])
+		while (++i[0] < f->nfil && f->buff[i[2]])
 		{
 			if (!(f->map[i[0]] = ft_calloc(f->ncolmax, sizeof(int *))))
 				return (0);
-			i[1] = 0;
-			while (i[1] < f->ncolmax && f->buff[i[2]] != '\n')
+			i[1] = -1;
+			while (++i[1] < f->ncolmax && f->buff[i[2]] != '\n')
 			{
 				ft_filling_matrix(f, i[2], i[0], i[1]);
 				i[2]++;
-				i[1]++;
 			}
 			i[2]++;
-			i[0]++;
 		}
+		f->mapreaded = 1;
+		if (f->dir == '\0')
+			ft_handle_error("ERROR: NOT INIT PLAYER\n");
 	}
 	return (0);
 }

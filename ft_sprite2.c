@@ -37,7 +37,7 @@ void		ft_draw_sprite_line(t_file *f, int y, int d)
 	while (stripe < f->end_sp_x)
 	{
 		f->tex_x = (int)(256 * (stripe - (-f->sp_width / 2 + f->sp_screen_x))
-		* TEXTURE_WIDTH / f->sp_width) / 256;
+		* SIZE / f->sp_width) / 256;
 		if (f->transform.y > 0 && stripe > 0 && stripe < f->w
 			&& f->transform.y < f->z_buffer[stripe])
 		{
@@ -45,9 +45,9 @@ void		ft_draw_sprite_line(t_file *f, int y, int d)
 			while (y < f->end_sp_y)
 			{
 				d = (y - f->movescreen) * 256 - f->h * 128 + f->sp_height * 128;
-				f->tex_y = ((d * TEXTURE_HEIGHT) / f->sp_height) / 256;
+				f->tex_y = ((d * SIZE) / f->sp_height) / 256;
 				if (f->tex_y >= 0)
-					color = f->tdata[4][TEXTURE_WIDTH * f->tex_y + f->tex_x];
+					color = f->tdata[4][SIZE * f->tex_y + f->tex_x];
 				if (color != f->tdata[4][0])
 					*(f->data_img + (y * f->w) + stripe) = color;
 				y++;

@@ -80,7 +80,7 @@ int			get_next_line(int fd, char **line)
 {
 	int			ret;
 	char		*buffer;
-	static char	*file;
+	static char *file;
 
 	ret = BUFFER_SIZE;
 	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))) || !line)

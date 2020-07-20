@@ -67,13 +67,14 @@ int			ft_handle_cfloor(t_file *f)
 			ft_handle_error("ERROR: IN FLOOR COLOR");
 		if ((f->cf[0] = ft_atoi(test2[0])) >= 0)
 			if (f->cf[0] > 255 || f->cf[0] < 0)
-				return ((f->rtn = -1));
+				f->rtn = -1;
 		if ((f->cf[1] = ft_atoi(test2[1])) >= 0)
 			if (f->cf[1] > 255 || f->cf[1] < 0)
-				return ((f->rtn = -1));
+				f->rtn = -1;
 		if ((f->cf[2] = ft_atoi(test2[2])) >= 0)
 			if (f->cf[2] > 255 || f->cf[2] < 0)
-				return ((f->rtn = -1));
+				f->rtn = -1;
+		f->countmap[6]++;
 		freeaux(test2);
 	}
 	return (f->rtn);
@@ -102,6 +103,7 @@ int			ft_handle_croof(t_file *f)
 		if ((f->cc[2] = ft_atoi(test2[2])) >= 0)
 			if (f->cc[2] > 255 || f->cc[2] < 0)
 				return ((f->rtn = -1));
+		f->countmap[7]++;
 		freeaux(test2);
 	}
 	return (f->rtn);
